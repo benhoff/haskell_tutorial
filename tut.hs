@@ -54,12 +54,12 @@ tell (x:[]) = "The list has one element " ++ show x
 tell (x:y:[]) = "The list has two elements: " ++ show x ++ " and " ++ show y
 tell (x:y:_) = "this list is too long. First and second element are :" ++ show x ++ "and " ++ show y
 
-bmiTell :: (RealFloat a) => a -> a -> String
+{-bmiTell :: (RealFloat a) => a -> a -> String
 bmiTell weight height
-	| bmi <= skinny	  = "You're underweight, that can be hard, sorry!"
+	| bmi <= skinny	= "You're underweight, that can be hard, sorry!"
 	| bmi <= normal = "You're supposedly nomral. Bet you're not though!"
-	| bmi <= fat = "You're fat! Lose some weight!"
-	| otherwise	  = "you're undeniable!"
+	| bmi <= fat    = "You're fat! Lose some weight!"
+	| otherwise	    = "you're undeniable!"
 	where 
 		bmi = weight / height ^ 2
 		(skinny, normal, fat) = (18.5, 25.0, 30.0)
@@ -89,6 +89,7 @@ cylinder r h =
 
 max' :: (Ord a) => a -> a -> a
 max' a b | a > b = a | otherwise = b
+-}
 
 --max' :: (Ord a) => a -> a -> a
 --max' a b
@@ -104,8 +105,14 @@ max' a b | a > b = a | otherwise = b
 --fizzBuzz :: (x, 0) = "Buzz"
 --fizzBuzz :: (x, y) = show (x * 3)
 
---fizzBuzz :: (Integral a) => a -> String
---fizzBuzz a `mod` 3 == 0 + a `mod` 5 == 0 = "FizzBuzz"
---fizzBuzz a `mod` 3 == 0 = "Fizz"
---fizzBuzz a `mod` 5 == 0 = "Buzz"
---fizzBuzz a = show a 
+fizzBuzz' :: (Integral a, Show a) => a -> String
+fizzBuzz' a 
+	| a `mod` 3 == 0 && a `mod` 5 == 0 = "FizzBuzz"
+	| a `mod` 3 == 0 = "Fizz"
+	| a `mod` 5 == 0 = "Buzz"
+	| otherwise = show a 
+
+
+-- Init merely strips of the last space.
+fizzBuzz :: Integer -> String
+fizzBuzz x = init (concat [fizzBuzz' n ++ " " | n <- [1..x]])
