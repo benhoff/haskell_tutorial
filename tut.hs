@@ -1,3 +1,7 @@
+multThree :: (Num a) => a -> a -> a -> a
+multThree x y z = x * y * z
+
+
 
 reverse' :: [a] -> [a]
 reverse' [] = []
