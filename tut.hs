@@ -1,3 +1,21 @@
+
+head' :: [a] -> a
+head' xs = case xs of [] -> error "No head for empty lists!"
+                      (x:_) -> x
+
+{-
+describeList :: [a] -> String
+describeList xs = "The list is " ++ case xs of [] -> "empty."
+                                               [x] -> "a singleton list."
+                                               xs -> "a longer list."
+-}
+
+describeList :: [a] -> String
+describeList xs = "This list is " ++ what xs
+    where what [] = "empty."
+          what [x] = "a singleton list."
+          what xs = "a longer list."
+
 doubleMe x = x + x
 doubleUs x y = doubleMe x + doubleMe y
 
@@ -44,10 +62,11 @@ factorial :: (Integral a) => a -> a
 factorial 0 = 1
 factorial n = n * factorial (n-1)
 
+{-
 head' :: [a] -> a
 head' [] = error "I love it when tutorials call me dumb"
 head' (x:_) = x
-
+-}
 tell :: (Show a) => [a] -> String
 tell [] = "The list is empty"
 tell (x:[]) = "The list has one element " ++ show x
